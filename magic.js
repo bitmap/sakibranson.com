@@ -147,7 +147,6 @@ function waveText(nodes, speed = 60) {
       key += 1
 
       const animationDelay = `animation-delay: ${key * speed}ms`
-      const transitionDelay = `transition-delay: ${key * speed}ms`
 
       const span = document.createElement('span')
       span.innerText = char
