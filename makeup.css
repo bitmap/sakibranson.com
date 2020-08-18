@@ -263,7 +263,6 @@ main {
 }
 
 .hola {
-  display: block;
   margin-top: 2.25rem;
 }
 
@@ -457,4 +456,11 @@ main {
 
 .amp {
   color: var(--secondary);
+}
+
+
+@media (min-width: 40em) {
+  .dbr {
+    display: block;
+  }
 }
