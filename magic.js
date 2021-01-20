@@ -1,12 +1,12 @@
 const styleSheet = (() => {
-  var style = document.createElement("style");
-  document.head.appendChild(style);
-  return style.sheet;
-})();
+  var style = document.createElement("style")
+  document.head.appendChild(style)
+  return style.sheet
+})()
 
 function tickerTape(nodes, config = {}) {
   const ID = Math.random().toString(36).substr(2, 5)
-  const selector = 'ticker-' + ID
+  const selector = "ticker-" + ID
 
   const defaultOptions = {
     speed: 30,
@@ -24,11 +24,11 @@ function tickerTape(nodes, config = {}) {
   nodes.forEach(makeTicker)
 
   function makeTickerStyles() {
-    const animationName = 'a-' + selector
-    const animationNameReverse = animationName + '-reverse'
+    const animationName = "a-" + selector
+    const animationNameReverse = animationName + "-reverse"
 
-    const trasnformFrom = `{ transform: translate3d(${options.invert ? '-100%' : '0%'}, 0, 0 ); }`
-    const transformTo = `{ transform: translate3d(${options.invert ? '0%' : '-100%'}, 0, 0 ); }`
+    const trasnformFrom = `{ transform: translate3d(${options.invert ? "-100%" : "0%"}, 0, 0 ); }`
+    const transformTo = `{ transform: translate3d(${options.invert ? "0%" : "-100%"}, 0, 0 ); }`
 
     styleSheet.insertRule(`@keyframes ${animationName} {
       from ${trasnformFrom}
@@ -66,10 +66,10 @@ function tickerTape(nodes, config = {}) {
 
   function makeTicker(ticker) {
     let cachedWidth = 0
-    ticker.className += ' ' + selector
+    ticker.className += " " + selector
 
-    // Query the first node. This is what we'll clone.
-    const tickerList = ticker.querySelector(':first-child')
+    // Query the first node. This is what we"ll clone.
+    const tickerList = ticker.querySelector(":first-child")
 
     // Get the scrollWidth of the node to calculate how many elements to create.
     const { scrollWidth: width } = tickerList
@@ -82,11 +82,11 @@ function tickerTape(nodes, config = {}) {
         const tickerItems = Math.ceil(browserWidth / width)
         const calculatedSpeed = Math.ceil((browserWidth + width) / tickerItems) * options.speed
 
-        ticker.innerHTML = ''
+        ticker.innerHTML = ""
 
         for (let i = 0; i <= tickerItems; i += 1) {
           const tickerListClone = tickerList.cloneNode(true)
-          tickerListClone.style.animationDuration = calculatedSpeed + 'ms'
+          tickerListClone.style.animationDuration = calculatedSpeed + "ms"
           ticker.append(tickerListClone)
         }
 
@@ -94,7 +94,7 @@ function tickerTape(nodes, config = {}) {
       }
     }
 
-    window.addEventListener('resize', makeTickerItems)
+    window.addEventListener("resize", makeTickerItems)
     makeTickerItems()
   }
 }
@@ -138,19 +138,19 @@ function waveText(nodes, speed = 60) {
 
   function splitSpan(node) {
     const textString = node.innerText
-    const characters = textString.split('')
+    const characters = textString.split("")
     let key = 0
 
-    node.innerHTML = ''
+    node.innerHTML = ""
 
     characters.forEach(char => {
       key += 1
 
       const animationDelay = `animation-delay: ${key * speed}ms`
 
-      const span = document.createElement('span')
+      const span = document.createElement("span")
       span.innerText = char
-      span.setAttribute('style', `${animationDelay};`)
+      span.setAttribute("style", `${animationDelay};`)
 
       node.appendChild(span)
     })
@@ -159,5 +159,5 @@ function waveText(nodes, speed = 60) {
   nodes.forEach(splitSpan)
 }
 
-waveText(document.querySelectorAll('a'))
-tickerTape(document.querySelectorAll('.ticker'))
+waveText(document.querySelectorAll("a"))
+tickerTape(document.querySelectorAll(".ticker"))
